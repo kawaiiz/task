@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>淘宝轮播图</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		body{
+			text-align: center;
+		}
+		#box{
+			display: inline-block;
+			width: 320px;
+			height: 180px;
+			margin: 20px auto;
+			position: relative;
+			overflow: hidden;
+			border: 2px solid #888; 
+		}
+		#container{
+			display: inline-block;
+			position: absolute;
+			left: -320px;
+			width: 2240px;
+			height: 180px;	
+			z-index: 1;		
+		}
+		#container img{
+			float: left;
+			width: 320px;
+			height: 180px;			
+		}
+		#btr{
+			display: inline;
+			position: absolute;
+			left: 122px;
+			width: 75px;
+			height: 6px;
+			bottom: 20px;
+			z-index: 2;
+		}
+		#btr span{
+			cursor: pointer;
+			width: 8px;
+			height: 8px;
+			border: 1px solid #fff;
+			border-radius: 50%;
+			background-color: #333;
+			float: left;
+			margin-right: 5px;
+		}
+		#btr .on{
+			background-color: orangered;
+		}
+		.arrow{
+			cursor: pointer;
+			display: none;
+			position: absolute;
+			top: 80px; 
+			width: 35px;
+			height: 25px;
+			background-color: #292929;
+			opacity: 0.5;
+			z-index: 2;
+		}
+		.arrow:hover{
+			opacity: 1;
+		}
+		#left{
+			left: 20px;
+		}
+		#right{
+			right: 20px;
+		}
+		#box:hover .arrow{
+			display: inline-block;
+		}
+		
+	</style>
+</head>
+<body>
+	<div id="box">
+		<div id="container">
+			<img src="yellow.png" alt="5">
+			<img src="black.png" alt="1">
+			<img src="blue.png" alt="2">
+			<img src="green.png" alt="3">
+			<img src="red.png" alt="4">
+			<img src="yellow.png" alt="5">
+			<img src="black.png" alt="1">
+		</div>
+		<div id="btr">
+			<span index="1" class="on"></span>
+			<span index="2"></span>
+			<span index="3"></span>
+			<span index="4"></span>
+			<span index="5"></span>
+		</div>
+		<div class="arrow" id="left"></div>
+		<div class="arrow" id="right"></div>
+	</div>
+	<script src="../mokuai.js"></script>
+	<script>
+		var arrowl = document.getElementById("left");
+		var arrowr = document.getElementById("right");
+		var container = document.getElementById("container");
+		var btr = document.getElementById("btr").getElementsByTagName("span");
+		var times;//自动运动定时器
+		var index = 1;
+		var flag = true;
+		/*按钮变化*/
+		function showbtr (){
+			for (var i = 0; i < btr.length; i++) {
+				if(btr[i].className == "on"){
+					btr[i].className = "";
+				}
+			}
+			btr[index - 1].className = "on";
+		}
+		/*通过判断点击物计算位移值*/
+		var arrowsport = function () {
+			if(flag){
+				flag = false;
+				var direction;
+				var nowleft = parseInt(getStyle(container,"left"));
+				if(this == arrowl){
+					direction = 320; 
+					index -= 1;
+					if (nowleft == -320){
+						index = 5;
+					}
+					if (nowleft > -320) {
+						container.style.left = "-1600px";
+						nowleft = -1600;				
+				}
+				}else if(this == arrowr){
+					direction = -320;
+					index += 1;
+					if(nowleft == -1600){
+						index = 1;
+					}
+					if (nowleft < -1600) {
+						container.style.left = "-320px";
+						nowleft = -320;
+					}
+				}else{
+					var num;
+					for (var i = 0; i < btr.length; i++) {
+					if(btr[i].className == "on"){
+						num = parseInt(btr[i].getAttribute("index"));//获得的时string类型和箭头按钮里的+=会冲突
+					}
+				}
+				index = parseInt(this.getAttribute("index"));
+
+				num -= index;
+				direction = num * 320;
+				}
+				var target = nowleft + direction;
+				start(container,{left:target},function(){
+					showbtr();
+					flag = true;
+				});
+			}
+		}
+
+		EventUtil.addEvent(arrowl,"click",arrowsport);
+		EventUtil.addEvent(arrowr,"click",arrowsport);
+
+		for(var j = 0; j < btr.length; j++){
+			var x = btr[j];
+			EventUtil.addEvent(x,"click",arrowsport);
+		}
+
+		function autosport(){
+			times = setInterval(function(){
+				arrowr.click();
+				},3000);
+		}
+		EventUtil.addEvent(container,"mouseover",function(){
+			clearInterval(times);
+		});
+		EventUtil.addEvent(container,"mouseout",autosport);
+		autosport();
+
+	</script>
+</body>
+</html>
