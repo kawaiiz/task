@@ -43,14 +43,13 @@
 			z-index: 2;
 		}
 		#btr span{
+			display:inline-block;
 			cursor: pointer;
 			width: 8px;
 			height: 8px;
 			border: 1px solid #fff;
 			border-radius: 50%;
 			background-color: #333;
-			float: left;
-			margin-right: 5px;
 		}
 		#btr .on{
 			background-color: orangered;
@@ -84,13 +83,13 @@
 <body>
 	<div id="box">
 		<div id="container">
-			<img src="yellow.png" alt="5">
-			<img src="black.png" alt="1">
-			<img src="blue.png" alt="2">
-			<img src="green.png" alt="3">
-			<img src="red.png" alt="4">
-			<img src="yellow.png" alt="5">
-			<img src="black.png" alt="1">
+			<img src="../img/yellow.png" alt="5">
+			<img src="../img/black.png" alt="1">
+			<img src="../img/blue.png" alt="2">
+			<img src="../img/green.png" alt="3">
+			<img src="../img/red.png" alt="4">
+			<img src="../img/yellow.png" alt="5">
+			<img src="../img/black.png" alt="1">
 		</div>
 		<div id="btr">
 			<span index="1" class="on"></span>
@@ -102,7 +101,7 @@
 		<div class="arrow" id="left"></div>
 		<div class="arrow" id="right"></div>
 	</div>
-	<script src="../mokuai.js"></script>
+	<script src="../jsfile/mokuai.js"></script>
 	<script>
 		var arrowl = document.getElementById("left");
 		var arrowr = document.getElementById("right");
@@ -113,6 +112,7 @@
 		var flag = true;
 		/*按钮变化*/
 		function showbtr (){
+
 			for (var i = 0; i < btr.length; i++) {
 				if(btr[i].className == "on"){
 					btr[i].className = "";
@@ -179,10 +179,16 @@
 				arrowr.click();
 				},3000);
 		}
-		EventUtil.addEvent(container,"mouseover",function(){
+		EventUtil.addEvent(box,"mouseover",function(){
 			clearInterval(times);
 		});
-		EventUtil.addEvent(container,"mouseout",autosport);
+		EventUtil.addEvent(arrowl,"mouseover",function(){
+			clearInterval(times);
+		});
+		EventUtil.addEvent(arrowr,"mouseover",function(){
+			clearInterval(times);
+		});
+		EventUtil.addEvent(box,"mouseout",autosport);
 		autosport();
 
 	</script>

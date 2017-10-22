@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="zh-cn">
+	<title>旋转浮动图</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+
+		body{
+			text-align: center;
+		}
+		div#box{
+			margin: 50px auto;
+			width: 1000px;
+			height: 250px;
+		}
+		div#container{
+			position: relative;
+			width: 1000px;
+			height: 200px;
+			
+		}
+		div#container>div{
+			display: inline-block;
+			position: absolute;
+		}
+		.div0{
+			width: 350px;
+			height: 140px;
+			top:30px;
+			left: 0;
+			z-index: 0;
+		}
+		.div1{
+			width: 400px;
+			height: 160px;
+			top:20px;
+			left: 120px;
+			z-index: 1;
+		}
+		.div2{
+			width: 500px;
+			height:200px;
+			top:0;
+			left: 250px;
+			z-index: 2;
+		}
+		.div3{
+			width: 400px;
+			height: 160px;
+			top: 20px;
+			left: 480px;
+			z-index: 1
+		}
+		.div4{
+			width: 350px;
+			height: 140px;
+			top:30px;
+			left: 650px;
+			z-index: 0;
+		}
+		#btr{
+			height: 50px;
+			line-height: 50px;
+		}	
+		#btr span{
+			cursor: pointer;
+			display: inline-block;
+			width: 15px;
+			height: 15px;
+			background-color: #393939;
+			border-radius: 50%
+		}
+		#btr span+span{
+			margin-left: 10px;
+		}
+		#btr .on{
+			background-color: orangered;
+		}
+		
+		img{
+			cursor: pointer;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;/* 图片比例及是否超出裁剪 */
+		}
+	</style>
+</head>
+<body>
+	<div id="box">
+		<div id="container">
+			<div class="div0"><img src="../img/black.png"></div>
+			<div class="div1"><img src="../img/blue.png"></div>
+			<div class="div2"><img src="../img/green.png"></div>
+			<div class="div3"><img src="../img/red.png"></div>
+			<div class="div4"><img src="../img/yellow.png"></div>
+		</div>
+		<div id="btr">
+			<span index="0"></span>
+			<span index="1"></span>
+			<span index="2" class="on"></span>
+			<span index="3"></span>
+			<span index="4"></span>
+		</div>	
+	</div>
+	<script src="../jsfile/mokuai.js"></script>
+	<script>
+		var imgDiv = document.getElementById("container").getElementsByTagName("div");
+		var btr = document.getElementById("btr").getElementsByTagName("span");';'
+		var flag = true;
+		var index = 2;
+		var times;
+		var arr = new Array;
+		for(var i=0;i<btr.length;i++){
+	  		arr.push({
+	  			left:parseInt(getStyle(imgDiv[i],'left')),
+	  			top:parseInt(getStyle(imgDiv[i],'top')),
+	  			width:parseInt(getStyle(imgDiv[i],'width')),
+	  			height:parseInt(getStyle(imgDiv[i],'height')),
+	  			zIndex:parseInt(getStyle(imgDiv[i],'zIndex'))
+	  		});
+  		}
+
+  		function sort(target,now){
+  			var shift = target - now;
+			for(var k = 0; k<Math.abs(shift); k++){
+				if(shift > 0){
+  					arr.unshift(arr.pop());	
+  				}else{
+  				arr.push(arr.shift());
+  				}
+  			}
+  			index = target;
+  			return arr;
+  		}
+		function btrColor(obj){
+			for(var k = 0; k < btr.length; k++){
+				if(btr[k].classList.contains("on")){
+					btr[k].classList.remove("on");
+				}
+			}	
+			obj.classList.add("on");
+		}
+			
+		function sport(newArr){
+			for(var k = 0; k < btr.length; k++){
+				var target = imgDiv[k];
+				var xx = newArr[k];
+				target.style.zIndex = xx.zIndex;
+				start(target,xx);
+			}
+		}	
+		var btrOn = function () {
+			clearInterval(times);
+			var _this = this;
+			var btrIndex = _this.getAttribute("index");
+			btrColor(_this);
+			var newArr = sort(btrIndex,index);
+			sport(newArr);			
+		}
+ 		function autosport(){
+ 			times = setInterval(function () {
+				if(index != btr.length - 1){
+					index++;	
+				}else{
+					index = 0;
+				}
+				btrColor(btr[index]);
+				var newArr = sort(index,index-1);
+				sport(newArr);
+			},3000);
+ 		}
+		
+ 		autosport();
+
+		for(var j = 0; j < btr.length; j++ ){
+			var x = btr[j];
+			EventUtil.addEvent(x,"mouseover",btrOn);
+			EventUtil.addEvent(x,"mouseout",autosport);
+			EventUtil.addEvent(imgDiv[j],"mouseover",function () {
+				clearInterval(times);
+			})
+			EventUtil.addEvent(imgDiv[j],"mouseout",autosport);
+			EventUtil.addEvent(imgDiv[j],"click",function () {debugger;
+				btr[this.index].mouseover();
+			})
+		}
+	</script>
+</body>
+</html>

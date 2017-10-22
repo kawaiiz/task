@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>淡入淡出切换</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		#container{
+			position: relative;
+			margin: 10px auto ;
+			border: 2px solid #757575;
+			width: 440px;
+			height: 300px;			
+		}
+		#container>img{
+			position: absolute;
+			top:0;
+			left: 0;
+			width: 440px;
+			height: 300px;
+			opacity: 0;
+		}
+		#container>img:first-child{
+			opacity: 1;
+		}
+		
+		#btr{
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 440px;
+			height: 50px;
+			line-height: 50px;
+			
+		}
+
+		.btrbg{
+			cursor: pointer;
+			float: left;
+			width: 110px;
+			line-height: 50px;
+			text-align: center; 
+			background:rgba(200,167,117,0.3);
+			
+		}
+		.btran{
+			background:rgba(200,167,117,0.5);
+		}
+	</style>
+</head>
+<body>
+	<div id="container">
+		<img src="../img/blue.png" alt="blue">
+		<img src="../img/green.png" alt="green">
+		<img src="../img/red.png" alt="red">
+		<img src="../img/yellow.png" alt="yellow">
+		<div id="btr">
+			<div class="btrbg btran"  index="1"><span>blue</span></div>
+			<div class="btrbg"  index="2"><span>geeen</span></div>
+			<div class="btrbg" index="3"><span>red</span></div>
+			<div class="btrbg" index="4"><span>yellow</span></div>
+		</div>	
+	</div>
+	<script src="../jsfile/mokuai.js"></script>
+	<script src="../jsfile/jquery-ui.js"></script>
+	<script src="../jsfile/jquery-3.2.1.min.js"></script>
+	<script>
+		var img = document.getElementById("container").getElementsByTagName("img");
+		var btr = document.getElementById("btr").getElementsByTagName("div");
+		var index = 1;
+		var flag = true,
+			auto;
+		var btrClick = function(){ 
+			if(flag){
+				flag = false;
+				index = parseInt(this.attributes["index"].value);//当前点击的按钮
+				for( var k = 0; k<btr.length; k++){
+					if(btr[k].classList.contains("btran")){
+						btr[k].classList.remove("btran");
+						var nowi = k;	//之前的那张照片
+					}
+				}
+				start(img[nowi],{opacity:0},function(){
+					start(img[index - 1],{opacity:1});
+					btr[index - 1].classList.add("btran");
+					flag = true;
+				});
+			}
+		}
+		for( var j = 0; j<btr.length; j++){
+			var x = btr[j];
+			EventUtil.addEvent(x,"click",btrClick);
+		}
+		function autosport(){
+			if(flag){
+				flag = false;
+				auto = setInterval(function (){
+					var i;
+					var nowi;
+					for(i = 0; i<btr.length; i++){
+						if(btr[i].classList.contains("btran")){
+							btr[i].classList.remove("btran");
+							nowi = i;	//当前图片的序号
+							if(nowi == 3){
+								start(img[3],{opacity:0},function(){
+									start(img[0],{opacity:1});
+									btr[0].classList.add("btran");
+								});
+							}else{
+								start(img[nowi],{opacity:0},function(){
+									start(img[nowi + 1],{opacity:1});
+									btr[nowi + 1].classList.add("btran");
+									flag = true;
+								});
+							}	break;				
+						}	
+					}
+				},3000);
+			}
+			
+		}
+		EventUtil.addEvent(container,"mouseover",function(){
+			clearInterval(auto);
+			flag = true;
+		});
+		EventUtil.addEvent(container,"mouseout",autosport);		
+		autosport();		
+
+	
+
+			
+	</script>		
+</body>
+</html>
