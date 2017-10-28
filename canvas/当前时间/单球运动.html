@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>单球运动</title>
+	<style>
+		body{
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canvas"></canvas>
+	<script>
+		var canvas =document.getElementById("canvas");
+		var context = canvas.getContext("2d");
+		var R = 20;
+		canvas.width = 500;
+		canvas.height = 500;
+		var boll = {
+			x:300,
+			y:50,
+			vx:-5,
+			g:9.8,
+			vy:-10
+		}
+		setInterval(function(){
+			sport();
+			afterdata();
+		},50)
+
+		function afterdata(){
+			boll.x += boll.vx;
+			boll.vy += boll.g; 
+			boll.y += boll.vy;
+			if ( (boll.y + R/2) > canvas.height){
+				boll.y = canvas.height - R;
+				boll.vy = -boll.vy*0.75;
+			}
+		}
+
+		function sport(){
+			context.clearRect(0,0,canvas.width,canvas.height);
+			context.fillStyle = "#006699";
+			context.beginPath();
+			context.arc(boll.x,boll.y,R,0,2*Math.PI);
+			context.closePath();
+			context.fill();
+		}
+		
+
+	</script>
+</body>
+</html>

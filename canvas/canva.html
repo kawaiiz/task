@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<title>canvas</title>
+	<style>
+	</style>
+</head>
+<body>
+	<canvas id="canvas"></canvas>
+	<script>
+		var data = [
+			{p:[{x:0,y:0},{x:800,y:0},{x:400,y:400}],color:"red"},	
+			{p:[{x:0,y:0},{x:400,y:400},{x:0,y:800}],color:"yellow"},
+			{p:[{x:800,y:0},{x:800,y:400},{x:600,y:600},{x:600,y:200}],color:"blue"},
+			{p:[{x:600,y:200},{x:600,y:600},{x:400,y:400}],color:"pink"},
+			{p:[{x:400,y:400},{x:600,y:600},{x:400,y:800},{x:200,y:600}],color:"white"},
+			{p:[{x:200,y:600},{x:400,y:800},{x:0,y:800}],color:"black"},
+			{p:[{x:800,y:400},{x:800,y:800},{x:400,y:800}],color:"orange"}
+		];	
+
+		var canvas = document.getElementById("canvas");
+		canvas.width = 800;
+		canvas.height = 800;	
+
+
+
+		var cantext = canvas.getContext("2d");
+		for (var i = 0; i < data.length; i++){
+			draw (data[i],cantext);
+		}
+		function draw (data,ctx) {
+			ctx.beginPath();
+			ctx.moveTo(data.p[0].x,data.p[0].y);
+			for( var j = 1; j < data.p.length ; j++){
+				ctx.lineTo(data.p[j].x,data.p[j].y);
+							}
+
+			//ctx.lineTo(data.p[0].x,data.p[0].y);
+			ctx.closePath();
+			ctx.fillStyle = data.color;
+			ctx.fill();
+		}
+
+	</script>
+</body>
+</html>

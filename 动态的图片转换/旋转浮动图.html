@@ -92,11 +92,11 @@
 <body>
 	<div id="box">
 		<div id="container">
-			<div class="div0"><img src="../img/black.png"></div>
-			<div class="div1"><img src="../img/blue.png"></div>
-			<div class="div2"><img src="../img/green.png"></div>
-			<div class="div3"><img src="../img/red.png"></div>
-			<div class="div4"><img src="../img/yellow.png"></div>
+			<div class="div0" index="0"><img src="../img/black.png"></div>
+			<div class="div1" index="1"><img src="../img/blue.png"></div>
+			<div class="div2" index="2"><img src="../img/green.png"></div>
+			<div class="div3" index="3"><img src="../img/red.png"></div>
+			<div class="div4" index="4"><img src="../img/yellow.png"></div>
 		</div>
 		<div id="btr">
 			<span index="0"></span>
@@ -107,9 +107,11 @@
 		</div>	
 	</div>
 	<script src="../jsfile/mokuai.js"></script>
+	<script src="../jsfile/jquery-3.2.1.min.js"></script>
+	<script src="../jsfile/jquery-ui.js"></script>
 	<script>
 		var imgDiv = document.getElementById("container").getElementsByTagName("div");
-		var btr = document.getElementById("btr").getElementsByTagName("span");';'
+		var btr = document.getElementById("btr").getElementsByTagName("span");
 		var flag = true;
 		var index = 2;
 		var times;
@@ -123,7 +125,7 @@
 	  			zIndex:parseInt(getStyle(imgDiv[i],'zIndex'))
 	  		});
   		}
-
+		/*通过鼠标移到按钮改变元素样式*/
   		function sort(target,now){
   			var shift = target - now;
 			for(var k = 0; k<Math.abs(shift); k++){
@@ -136,15 +138,19 @@
   			index = target;
   			return arr;
   		}
+
+  		/*鼠标移动到btr上变色*/
 		function btrColor(obj){
 			for(var k = 0; k < btr.length; k++){
 				if(btr[k].classList.contains("on")){
 					btr[k].classList.remove("on");
 				}
 			}	
+			debugger;
 			obj.classList.add("on");
 		}
-			
+		
+		/*运动函数*/	
 		function sport(newArr){
 			for(var k = 0; k < btr.length; k++){
 				var target = imgDiv[k];
@@ -152,13 +158,18 @@
 				target.style.zIndex = xx.zIndex;
 				start(target,xx);
 			}
-		}	
+		}
+
+		/*主函数*/
 		var btrOn = function () {
-			clearInterval(times);
+			clearInterval(times);	
 			var _this = this;
-			var btrIndex = _this.getAttribute("index");
-			btrColor(_this);
+			
+			var btrIndex = parseInt(_this.getAttribute("index"));
+			debugger;
+			btrColor(btr[btrIndex]);
 			var newArr = sort(btrIndex,index);
+			debugger;
 			sport(newArr);			
 		}
  		function autosport(){
@@ -174,19 +185,21 @@
 			},3000);
  		}
 		
+ 		
  		autosport();
-
 		for(var j = 0; j < btr.length; j++ ){
 			var x = btr[j];
 			EventUtil.addEvent(x,"mouseover",btrOn);
 			EventUtil.addEvent(x,"mouseout",autosport);
-			EventUtil.addEvent(imgDiv[j],"mouseover",function () {
+			var y = imgDiv[j];
+			EventUtil.addEvent(y,"mouseover",function () {
 				clearInterval(times);
-			})
-			EventUtil.addEvent(imgDiv[j],"mouseout",autosport);
-			EventUtil.addEvent(imgDiv[j],"click",function () {debugger;
-				btr[this.index].mouseover();
-			})
+			});
+			EventUtil.addEvent(y,"mouseout",autosport);
+			EventUtil.addEvent(y,"click",function () {
+				obj = this;
+				btrOn.call(obj);
+			});
 		}
 	</script>
 </body>
