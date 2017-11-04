@@ -12,8 +12,8 @@
 		}
 	</style>
 </head>
-<body>
-	<canvas id="canvas" style="height: 100%"></canvas>
+<body style="height:100%">
+	<canvas id="canvas" style="height:100%">您的浏览器不支持canvas</canvas>
 	<script src="../jquery-3.2.1.min.js"></script>
 	<script src="digit.js"></script>
 	<script>
@@ -21,7 +21,7 @@
 		var window_height = document.body.clientHeight;
 		var canvas_top = Math.round(window_height/20);
 		var canvas_left =Math.round(window_width/10);
-		var R =7;/* Math.round(window_width*4/5/108)-1;*/
+		var R =7;	/* Math.round(window_width*4/5/108)-1;*/
 		var canvas = document.getElementById("canvas");
 		var context = canvas.getContext("2d");
 		canvas.width = window_width;
@@ -30,12 +30,14 @@
 		var time = new Date();
 		var balls = new Array();
 		const color = ["#33B5E5","#0099CC","#AA66CC","#9933CC","#99CC00","#669900","#FFBB33","#FF8800","#FF4444","#CC0000"];
+		
 		setInterval(
 			function(){
 				render(context);
 				afterData(context);
 			},50);
 
+		
 		function afterData(cxt){
 			var nowTime = new Date();
 
@@ -65,6 +67,7 @@
 
 		}
 
+
 		function afterSportBall(){
 			for (var i = 0; i < balls.length; i++) {
 				balls[i].x += balls[i].vx;
@@ -93,6 +96,7 @@
 			}
 		}
 
+		
 		function addBall( x, y, num, cxt){
 			for (var i = 0; i < digit[num].length; i++) {
 				for (var j = 0; j < digit[num][i].length; j++) {
@@ -111,7 +115,6 @@
 			}
 
 		}
-
 
 		function render(cxt){		
 			var hour = time.getHours();
@@ -134,6 +137,7 @@
 				cxt.fill();		
 			}		
 		}
+
 
 		function renderDigit(x,y,num,cxt){
 			cxt.fillStyle = "#006699";

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>night sky</title>
+	<style>
+		body{
+			text-align: center;
+		}
+	</style>
+</head>
+<body style="height: 100%">
+	<canvas id="canvas" style="height: 100%"></canvas>
+	<script src="../jquery-3.2.1.min.js"></script>
+	<script>
+		var canvas = document.getElementById("canvas");
+		var context = canvas.getContext("2d");
+		canvas_width = document.documentElement.clientWidth;
+		canvas_height = document.documentElement.clientHeight;
+		canvas.width = canvas_width;
+		canvas.height = canvas_height;
+		var stars = [];
+		var color = ["width","#f7eed6"]
+		
+		function createStar(){
+			var num = Math.round(Math.random()*10);
+			for (var i = 0; i < num; i++) {
+					var aStar = {
+						x : Math.random()*canvas_width,
+						y : 0,
+						r : Math.random()*5,
+						R : Math.random()*10,
+						vy : Math.random()*2,
+						g : 0.1+Math.random()/2,
+						rot : Math.random()*72,
+						color : color[Math.round(Math.random())]
+					} 
+					stars.push(aStar);
+				}	
+		}
+
+		setInterval(function(){
+			createStar();
+			draw(context);
+			upData();
+			console.log(stars.length);
+		},30);
+
+		function upData(){
+			for (var i = 0; i < stars.length; i++) {
+				if(stars[i].y - Math.max(stars[i].r,stars[i].R) > canvas_height){
+					stars.splice(i,1);
+				}
+				stars[i].y += stars[i].vy;
+				if(stars[i].vy < 10){
+					stars[i].vy +=stars[i].g;
+				}
+				
+			}
+		}
+
+		function draw(cxt){
+			cxt.clearRect(0,0,canvas_width,canvas_height);
+			var gradient = context.createLinearGradient(0,0,0,800);
+			gradient.addColorStop(0,"#030027");
+			gradient.addColorStop(0.6,"#1202af");
+			gradient.addColorStop(1,"#00ccff");
+			context.fillStyle = gradient;
+			context.fillRect(0,0,canvas_width,canvas_height);
+			for (var i = 0; i < stars.length; i++) {
+				cxt.save();
+				cxt.beginPath();
+				
+				cxt.fillStyle = stars[i].color||"#ff3";
+				cxt.translate(stars[i].x,stars[i].y)
+				cxt.rotate(stars[i].rot/180*Math.PI);
+				drawStar(stars[i].r,stars[i].R,context);
+				cxt.closePath();
+				cxt.fill();
+				cxt.restore();
+			}
+		}
+
+		function drawStar(r,R,cxt){
+			for (var j = 0; j < 5; j++) {
+				
+				cxt.lineTo(Math.cos( (18+j*72)/180*Math.PI)*R ,
+							-Math.sin( (18+j*72)/180*Math.PI)*R  );
+				cxt.lineTo(Math.cos( (54+j*72)/180*Math.PI)*r ,
+							-Math.sin( (54+j*72)/180*Math.PI)*r  );
+			} 
+		}
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<title>贝塞尔曲线</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0; 
+			
+		}
+		body{
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<div id="box">
+		<canvas id="canvas">Your browser does not support the canvas element. </canvas>
+	</div>
+	<div style="width: 500"><p id="text"></p></div>
+	<script src="../jquery-3.2.1.min.js"></script>
+	<script src="../../jsfile/mokuai.js"></script>
+	<script>
+	
+		var box = document.getElementById("box");
+		var canvas = document.getElementById("canvas");
+		var context = canvas.getContext("2d");
+		var window_width = 500;
+		var window_height = 400;
+		canvas.width = window_width;
+		canvas.height = window_height;
+		var flag = false;
+		var nowMxy;
+		var num ;
+		var control = [{x:200,y:100},{x:300,y:300},{x:100,y:200},{x:400,y:200}];
+
+		EventUtil.addEvent(box,"mousedown",function (event) {
+			drawstart(event,context);
+		});
+		EventUtil.addEvent(box,"mousemove",function (){
+			drawing(event);
+			ptext();
+		});
+		EventUtil.addEvent(box,"mouseup",function(){
+			flag = false;
+		})
+
+		function ptext(){
+			var text = document.getElementById("text");
+			text.innerHTML = "context.moveTo("+control[2].x+","+control[2].y+");<br/>context.bezierCurveTo("+control[0].x+","+control[0].y+","+control[1].x+","+control[1].y+","+control[3].x+","+control[3].y+");"
+		}
+
+		function drawing(event){
+			if(flag){
+				var cs = getMousePos(event);
+				var xp = (cs.x - nowMxy.x)*(window_width/canvas.clientWidth);
+				var yp = (cs.y - nowMxy.y)*(window_height/canvas.clientHeight);
+
+				control[num].x += xp;
+				control[num].y += yp;
+				canvasDraw(control[0].x,control[0].y,control[1].x,control[1].y,control[2].x,control[2].y,control[3].x,control[3].y);
+				nowMxy = cs;
+			}
+		}
+
+		function drawstart(event,context){
+			nowMxy = getMousePos(event);
+			for (var i = 0; i < control.length; i++) {
+				var distance = Math.round(Math.sqrt(Math.pow(nowMxy.x - control[i].x,2) + Math.pow(nowMxy.y - control[i].y,2)));
+				if( distance <=10 ){
+					flag = true;
+					var OK = i;
+					num = OK;	
+				} 
+			}
+		}
+		function canvasDraw(x1,y1,x2,y2,x3,y3,x4,y4){
+			context.clearRect(0,0,window_width,window_height);
+			context.strokeStyle = "red";
+			context.fillStyle = "#ff3"
+			context.save();
+			context.beginPath();
+		
+			context.moveTo(x3,y3);
+			context.lineWidth = 5;
+			context.bezierCurveTo(x1,y1,x2,y2,x4,y4);
+		//	context.closePath();
+			context.stroke();
+			context.restore();
+			context.beginPath();
+			context.moveTo(x3+10,y3);
+			context.arc(x3,y3,10,0,2*Math.PI);
+			context.closePath();
+			context.fill();
+			context.stroke();
+			context.beginPath();
+			context.moveTo(x4+10,y4);
+			context.arc(x4,y4,10,0,2*Math.PI);
+			context.closePath();
+			context.fill();
+			context.stroke();
+			context.beginPath();
+			context.closePath();
+			context.beginPath();
+			context.moveTo(x1+10,y1);
+			context.arc(x1,y1,10,0,2*Math.PI);
+			context.closePath();
+			context.fill();
+			context.stroke();
+			context.beginPath();
+			context,moveTo(x2+10,y2);
+			context.arc(x2,y2,10,0,2*Math.PI);
+			context.closePath();
+			context.fill();
+			context.stroke();
+			context.strokeStyle = "#039";
+			context.beginPath();
+			context.moveTo(x2,y2);
+			context.lineTo(x4,y4);
+			context.closePath();
+			context.stroke();
+			context.beginPath();
+			context.moveTo(x1,y1);
+			context.lineTo(x3,y3);
+			context.closePath();
+			context.stroke();
+		}
+		function getMousePos(event){
+			return {
+				x : event.clientX - canvas.getBoundingClientRect().left,
+     			y : event.clientY - canvas.getBoundingClientRect().top
+			}
+		}
+		canvasDraw(200,100,300,300,100,200,400,200);
+
+	</script>
+
+
+</body>
+</html>

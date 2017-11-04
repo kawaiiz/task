@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body{
+			text-align : center;
+		}
+	</style>
+</head>
+<body style="height: 100%">
+	<canvas id="canvas" style="height: 100%"></canvas>
+	<script src="../jquery-3.2.1.min.js"></script>
+	<script>
+		var canvas = document.getElementById("canvas");
+		var context = canvas.getContext("2d");
+		var body_width = document.documentElement.clientWidth;
+		var body_height = document.documentElement.clientHeight;
+		var canvas_width =  Math.min(body_width,body_width)*0.6;
+		var canvas_height = Math.min(body_width,body_width)*0.6;
+		canvas.width =canvas_width;
+		canvas.height = canvas_height;
+		setInterval(function(){
+			nowTime(context);
+		},50);
+
+		function nowTime(cxt){
+			var time = new Date();
+			var hour = time.getHours();
+			var minute = time.getMinutes();
+			var second = time.getSeconds();
+			drawClock(hour,minute,second,cxt);
+		}
+
+		function drawClock(hour,minute,second,cxt){
+		//	alert(canvas_width/2);
+			cxt.clearRect(0,0,canvas_width,canvas_width);
+			cxt.beginPath();
+			cxt.arc(canvas_width/2,canvas_height/2,canvas_width/2-5,0,2*Math.PI);
+			cxt.moveTo(canvas_width-10,canvas_height/2);
+			cxt.arc(canvas_width/2,canvas_height/2,canvas_width/2-10,0,2*Math.PI);
+			cxt.closePath();
+			cxt.stroke();
+
+			cxt.save();
+			
+			cxt.beginPath();
+			cxt.translate(canvas_width/2,canvas_height/2);
+			cxt.moveTo(0,0);
+			cxt.fillStyle = "black";
+			cxt.arc(0,0,canvas_width/45,0,2*Math.PI);
+			cxt.closePath();
+			cxt.fill();
+			
+			cxt.beginPath();
+			cxt.lineWidth = 6;
+			cxt.moveTo(0,0);
+			cxt.lineTo(Math.cos((-90+hour/12*360)/180*Math.PI)*canvas_width*0.3,Math.sin((-90+hour/12*360)/180*Math.PI)*canvas_width*0.3);
+			cxt.closePath();
+			cxt.stroke();
+
+			cxt.beginPath();
+			cxt.moveTo(0,0);
+			cxt.lineWidth = 3;
+			cxt.lineTo(Math.cos((-90+minute/60*360)/180*Math.PI)*canvas_width*0.35,Math.sin((-90+minute/60*360)/180*Math.PI)*canvas_width*0.4);
+			cxt.closePath();
+			cxt.stroke();
+
+			cxt.beginPath();
+			cxt.moveTo(0,0);
+			cxt.lineWidth = 1;
+			cxt.lineTo(Math.cos((-90+second/60*360)/180*Math.PI)*canvas_width*0.40,Math.sin((-90+second/60*360)/180*Math.PI)*canvas_width*0.45);
+			cxt.closePath()
+			cxt.stroke();
+			cxt.restore();
+		}
+		
+	</script>
+	
+</body>
+</html>
