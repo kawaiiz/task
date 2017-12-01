@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+<input id="shuru" type="text">
+<button type="button" onclick="inin(this)" id="121">左侧入</button>&nbsp;
+<button type="button" onclick="inin(this)">右侧入</button>&nbsp;&nbsp;
+<button type="button" onclick="out(this)">左侧出</button>&nbsp;
+<button type="button" onclick="out(this)">右侧出</button>&nbsp;&nbsp;
+<br/>
+	<div id="big"></div>
+<script type="text/javascript">
+	
+	var a=document.getElementById("big");
+	
+	a.style.marginTop="20px";
+	function inin(obj)
+	{	
+		var b=document.getElementById("shuru").value;
+	 	if(b&&!isNaN(b))
+			{
+				var div=document.createElement("div");
+				div.innerHTML=document.getElementById("shuru").value;
+				div.style.display="inline";
+				div.style.backgroundColor="red";
+				div.style.padding="5px";
+				div.style.marginLeft="5px";
+				if(obj.innerHTML=="右侧入")
+					{
+					a.appendChild(div);
+					}
+	 			else
+					{
+  					a.insertBefore(div,a.childNodes[0]);
+					}
+			}
+	 	else
+			{
+				alert("请输入数值！");
+			}	
+	}
+	function out(obj)
+	{//alert(a.appendChild.length);
+	if(a.childNodes.length!=0)
+		{
+		if(obj.innerHTML=="右侧出")
+			{
+				var length=a.childNodes.length-1;
+				a.removeChild(a.childNodes[length]);
+			}	
+		else
+			{
+				a.removeChild(a.childNodes[0]);
+			}
+		}
+	else
+		{
+			alert("没有元素删除！");
+		}
+	}
+	</script>
+</body>
+</html>

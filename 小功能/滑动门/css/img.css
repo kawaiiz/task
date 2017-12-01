@@ -1,0 +1,15 @@
+/* CSS Document */
+#a img{
+	height:300px;
+	width:300px;
+	position:absolute;
+	display: block;
+	left: 0;
+}
+#a{
+	height: 300px;
+	margin: 0 auto;
+	border: 1px solid #505050;
+	position: relative;
+	overflow: hidden;
+}

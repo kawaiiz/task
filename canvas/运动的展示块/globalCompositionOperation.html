@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>globalCompositionOperation</title>
+</head>
+<body>
+	<canvas id="canvas"></canvas>
+	<script src="../../jsfile/jquery-3.2.1.min.js"></script>
+	<script>
+
+		var canvas = document.getElementById("canvas");
+		var context = canvas.getContext("2d");
+		var position = {x : 100,y : 100,width : 150,height : 100};
+		var flag = {x : true,y : false};
+		canvas.width = 500;
+		canvas.height = 500;
+		var img = new Image();
+		img.src = "../../img/flower.jpg";
+		var gradient = context.createRadialGradient(250,250,0,250,300,300);
+		gradient.addColorStop(0,"rgba(0,0,0,0.5)");
+		gradient.addColorStop(0.9,"rgba(0,0,0,0.45)")
+		gradient.addColorStop(1,"rgba(0,0,0,0.4)");
+		img.onload = function () {	
+			setInterval(function (){
+				drawing(position);
+				data(position);
+			}
+			,50);
+		}	
+		function data(obj){
+			if(flag.x){
+				obj.x += 5;
+				if(obj.x+obj.width >= canvas.width){
+					flag.x = false;
+				}
+			}else{
+				obj.x -= 5;
+				if(obj.x <= 0){
+					flag.x = true;
+				}
+			}
+			if(flag.y){
+				obj.y += 7;
+				if(obj.y+obj.height >= canvas.height){
+					flag.y = false;
+				}
+			}else{
+				obj.y -= 7;
+				if(obj.y <= 0){
+					flag.y = true;
+				}
+			}
+		}
+		function drawing(position){
+			context.clearRect(0,0,canvas.width,canvas.height);
+			context.fillStyle = gradient;
+			context.fillRect(0,0,500,500);				
+			context.clearRect(position.x,position.y,position.width,position.height);
+			context.globalCompositeOperation="destination-over";
+			context.drawImage(img,0,0,500,500);
+		}
+		/*	context.clearRect(0,0,canvas.width,canvas.height0);
+			context.fillStyle = gradient;
+			context.fillRect(0,0,500,500);				
+			context.clearRect(0,0,150,100);
+			context.globalCompositeOperation="destination-over";
+			img.onload = function () {
+				context.drawImage(img,0,0,500,500);
+			}	*/
+		
+	
+/*		var img = new Image();
+		img.src = "../../img/flower.jpg";
+		var gradient = context.createRadialGradient(250,250,0,250,250,250);
+		gradient.addColorStop(0,"rgba(0,0,0,0.5)");
+		gradient.addColorStop(1,"rgba(0,0,0,0.2)");
+		context.fillStyle = gradient;
+		context.fillRect(0,0,400,400);
+		context.clearRect(0,0,50,50);
+				context.globalCompositionOperation = "lighter";
+
+		context.fillStyle = "#f00";
+		context.fillRect(100,100,500,500);*/
+	/*	img.onload = function () {
+			context.drawImage(img,0,0,500,500);
+		}
+		*/
+	</script>
+</body>
+</html>
