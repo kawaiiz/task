@@ -1,0 +1,148 @@
+html{
+    width: 100%;
+    height: 100%;
+}
+body{
+    width: 100%;
+    height: 100%;
+}
+*{
+    margin: 0;
+    padding: 0;
+    letter-spacing: 0.05rem;
+}
+img{
+    width: 100%;
+}
+p{
+    margin-bottom: 0;
+}
+article{
+    font-size: 0.19rem;
+}
+/*头部div覆盖*/
+.header{
+    position: relative;
+    text-align: center;
+}
+.header>div{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.template_img_box,.template_img_box>div{
+    position: relative;
+}
+.template_img_box img{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+.header_title{
+    font-size: 0.6rem;
+}
+.content{
+    transform: translateY(-0.04rem);
+}
+
+.article_container{
+    padding: 0.30rem 0.5rem;
+}
+.article_title{
+    font-size: 0.32rem;
+    padding: 0.35rem 0;
+}
+.article_title>p{
+    width: 100%;
+    text-align: center;
+    margin: 0;
+}
+/*ul与li样式*/
+.article_content ul>li{
+    overflow:hidden;
+    display: block;
+    padding: 0.1rem 0;
+}
+.article_content ul>li>img{
+    float: left;
+    width: 0.15rem;
+    height: auto;
+    margin: 0.05rem;
+}
+.article_content ul>li p{
+    display: inline;
+}
+.revisePd{
+    padding-right: 0.1rem;
+}
+.revisePd>ul div{
+    padding: 0;
+}
+.article_content ul>li div{
+    padding-right: 0.05rem;
+}
+.article_content ul>li>div:last-child img{
+    width: 80%;
+    margin-bottom: 0.2rem;
+}
+.article3 .article_content img{
+    margin-bottom: 0.2rem;
+}
+.article4 .article_content p{
+    font-size: 0.16rem;
+    line-height: 300%;
+    text-indent: 2em;
+}
+/*article5 */
+.logistics ul>li+li{
+    border-top-width: 0.03rem;
+    border-top-style:dashed;
+}
+.wxButton{
+    width: 4rem;
+}
+
+/*二维码*/
+#QR{
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top:0;
+    left:0;
+    background-color: rgba(0,0,0,0.2);
+}
+#QR>img{
+    width: 3rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+/*虚化屏幕*/
+.vague{
+    -webkit-filter: blur(10px); /* Chrome, Opera */
+    -moz-filter: blur(10px);
+    -ms-filter: blur(10px);
+    filter: blur(10px);
+}
+
+/*六小按钮*/
+.ulButtom>li{
+    height: 100%;
+    position: relative;
+    display: inline-block;
+}
+.ulButtom>li>a{
+    text-decoration: none;
+    margin:  0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+

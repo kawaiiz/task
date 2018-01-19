@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>template1</title>
+    <link rel="stylesheet" href="/originMobile/public/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/originMobile/public/css/publicCss.css">
+    <style>
+
+        .font_color{
+            color: rgba(165,142,255,1);
+        }
+        .bgColor{
+            background: rgba(165,142,255,1);
+        }
+        .header div{
+            height: 100%;
+        }
+        .content{
+            background-image: url("/originMobile/public/img/1/bg1.png");
+            background-size:100% auto;
+            background-repeat:repeat-y;
+        }
+        .template_img_box{
+            padding-left: 1rem;
+        }
+        .template_img_box>img{
+            width: auto;
+            height: auto;
+        }
+        #header_name{
+            padding-top: 3.8rem;
+            text-align: center;
+        }
+        #header_name>p{
+            font-size: 0.30rem;
+        }
+        .header_title_box p{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            transform: translateX(-50%) translateY(-50%);
+        }
+        ul>li>div:last-child img{
+            box-shadow: 0.28rem 0.19rem 0 0 rgba(165,142,255,1);
+        }
+        .article3 .imgTitle>img{
+            margin-top: 0.3rem;
+            width: 25%;
+        }
+
+        .article3 .imgTitle>p{
+            color: rgba(255,255,255,1);
+            font-size: 0.2rem;
+            padding: 0.2rem 0.3rem;
+            margin: 0;
+        }
+        .article3 .bgColor>div{
+            padding: 0;
+            text-align: center;
+        }
+        .article3_img_box{
+            position: relative;
+        }
+        .article3_img_box>img{
+            position: relative;
+            bottom: 0.3rem;
+            margin-bottom: 0.2rem;
+        }
+        .article4 .article_content{
+            padding: 0.3rem 0 0 0.4rem;
+        }
+        .article4 .article_content>div{
+            background: rgba(255,255,255,1);
+            padding: 0.3rem 0 0 0.4rem;
+        }
+        .article4 .article_content>div>div{
+            padding: 0.4rem 0.24rem 0.6rem;
+        }
+        .article4 .article_content p{
+            color: rgba(255,255,255,1);
+        }
+        .article5{
+            background: rgba(255,255,255,1);
+            border-radius: 0.1rem;
+            box-shadow: 0 0 0.1rem 0.1rem rgba(0,0,0,0.1);
+            margin: 0.7rem 0.5rem;
+            padding: 0;
+        }
+        .article5 ul{
+            padding: 0 0.2rem;
+        }
+        .article5 ul>li{
+            border-top-color:rgba(238,238,238,1)
+        }
+        .bottomButton{
+            font-size: 0.16rem;
+            color: rgba(255,255,255,1);
+            margin: 0;
+        }
+        .bottomButton li{
+            border-radius: 0.05rem;
+            box-shadow: 0 0 0.1rem 0.05rem rgba(165,142,255,0.3);
+        }
+        .bottomButton li+li{
+            margin-left: 0.05em;
+        }
+        .ulButtom>li>a{
+            color: rgba(255,255,255,1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row header">
+            <img src="/originMobile/public/img/1/1.png" alt="">
+            <div class="col-xs-12">
+                <div class="row">
+                    <div class="col-xs-6 template_img_box">
+                        <div>
+                            <img src="/originMobile/public/img/1/blue3.jpg" alt="">
+                        </div>
+                    </div>
+                    <div class="col-xs-6 header_title_box"><p class="header_title font_color">石柱一号一号一号</p></div>
+                </div>
+            </div>
+            <div id="header_name"><p class="font_color">合作社名称</p></div>
+         </div>
+        <div class="row content">
+            <div class="col-xs-12">
+                <!--模块一 单纯文字-->
+                <article>
+                    <div class="row article_container font_color article1">
+                        <div class="col-xs-12">
+                            <div class="row">
+                                <div class="col-xs-12 article_title"><p>#溯源信息#</p></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 article_content revisePd">
+                                    <ul>
+                                        <li><img src="/originMobile/public/img/1/li.png" alt="">
+                                            <div class="col-xs-3"><p>农户姓名姓名密码吗：</p></div>
+                                            <div class="col-xs-8"></div>
+                                        </li>
+                                        <li><img src="/originMobile/public/img/1/li.png" alt="">
+                                            <div class="col-xs-3"><p>信息：</p></div>
+                                            <div class="col-xs-8"></div>
+                                        </li>
+                                        <li><img src="/originMobile/public/img/1/li.png" alt="">
+                                            <div class="col-xs-3"><p>种植时间：</p></div>
+                                            <div class="col-xs-8"><p>2017/3/28</p></div>
+                                        </li>
+                                        <li><img src="/originMobile/public/img/1/li.png" alt="">
+                                            <div class="col-xs-3"><p>灌溉时间：</p></div>
+                                            <div class="col-xs-8"><p>2017/3/29 4/20 5/10 5/20 5/30 6/10 2018/3/29 4/20 5/10 5/20 5/30 6/10</p></div>
+                                        </li>
+                                        <li><img src="/originMobile/public/img/1/li.png" alt="">
+                                            <div class="col-xs-3"><p>除草时间：</p></div>
+                                            <div class="col-xs-8"><p>2017/5/1 7/1</p></div>
+                                        </li>
+                                        <li><img src="/originMobile/public/img/1/li.png" alt="">
+                                            <div class="col-xs-3"><p>包装时间：</p></div>
+                                            <div class="col-xs-8"><p>2017/10/15</p></div>
+                                        </li>
+                                        <li><img src="/originMobile/public/img/1/li.png" alt="">
+                                            <div class="col-xs-3"><p>检测机构：</p></div>
+                                            <div class="col-xs-8"><p>PONY谱尼测试集团</p></div>
+                                        </li>
+                                        <li><img src="/originMobile/public/img/1/li.png" alt="">
+                                            <div class="col-xs-3"><p>技术指导：</p></div>
+                                            <div class="col-xs-8"><p>铜川市耀州区农业局技术指导推广中心</p></div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                <!--模块一结束-->
+                <!--模块二 含图片的的段落信息-->
+                <article>
+                    <div class="row article_container font_color article2">
+                        <div class="col-xs-12">
+                            <div class="row">
+                                <div class="col-xs-12 article_title"><p>#溯源信息#</p></div>
+                                <div class="col-xs-12 article_content revisePd">
+                                    <ul>
+                                        <li><img src="/originMobile/public/img/1/li.png" alt="">
+                                            <div class="col-xs-3"><p>农户姓名：</p></div>
+                                            <div class="col-xs-8">李百记</div>
+                                        </li>
+                                        <li><img src="/originMobile/public/img/1/li.png" alt="">
+                                            <div class="col-xs-3"><p>品种信息：</p></div>
+                                            <div class="col-xs-8"><img src="/originMobile/public/img/1/hui.jpg" alt=""><img src="/originMobile/public/img/1/blue1.jpg" alt=""></div>
+                                        </li>
+                                        <li><img src="/originMobile/public/img/1/li.png" alt="">
+                                            <div class="col-xs-3"><p>种植时间：</p></div>
+                                            <div class="col-xs-8"><p>2017/3/28</p></div>
+                                        </li>
+                                        <li><img src="/originMobile/public/img/1/li.png" alt="">
+                                            <div class="col-xs-3"><p>灌溉时间：</p></div>
+                                            <div class="col-xs-8"><p>2017/3/29 4/20 5/10</p></div>
+                                        </li>
+                                        <li><img src="/originMobile/public/img/1/li.png" alt="">
+                                            <div class="col-xs-3"><p>除草时间：</p></div>
+                                            <div class="col-xs-8"><p>2017/5/1 7/1 7/2 7/3 7/4 7/5 7/6 7/7 </p></div>
+                                        </li>
+                                        <li><img src="/originMobile/public/img/1/li.png" alt="">
+                                            <div class="col-xs-3"><p>包装时间：</p></div>
+                                            <div class="col-xs-8"><p>2017/10/15</p></div>
+                                        </li>
+                                        <li><img src="/originMobile/public/img/1/li.png" alt="">
+                                            <div class="col-xs-3"><p>检测机构：</p></div>
+                                            <div class="col-xs-8" ><img src="/originMobile/public/img/1/hui.jpg" alt=""><img src="/originMobile/public/img/1/hui.jpg" alt=""><img src="/originMobile/public/img/1/hui.jpg" alt=""></div>
+                                        </li>
+                                        <li><img src="/originMobile/public/img/1/li.png" alt="">
+                                            <div class="col-xs-3"><p>技术指导&nbsp;：</p></div>
+                                            <div class="col-xs-8"><p>铜川市耀州区农业局技术指导推广中心中心</p></div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                <!--模块二结束-->
+                <!--模块三 单个图片-->
+                <article>
+                    <div class="row article_container article3">
+                        <div class="col-xs-12">
+                            <div class="row">
+                                <div class="col-xs-12 article_title font_color"><p>#溯源信息#</p></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 article_content">
+                                    <div class="row bgColor">
+                                        <div class="col-xs-2 imgTitle"><img  src="/originMobile/public/img/1/图片标题.png" alt=""><p>图片标题</p></div>
+                                        <div class="col-xs-10 article3_img_box"><img src="/originMobile/public/img/1/hui.jpg" alt=""><img src="/originMobile/public/img/1/qinglan.jpg" alt=""></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                <!--模块三结束-->
+                <!--模块四 纯文字段落-->
+                <article>
+                    <div class="row article_container article4">
+                        <div class="col-xs-12">
+                            <div class="row">
+                                <div class="col-xs-12 article_title font_color"><p>#溯源信息#</p></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 article_content bgColor">
+                                    <div>
+                                        <div class="bgColor">
+                                            <p>随着社会文明的不断进步，越来越多的警示牌被温馨提示牌所取代，“请不要”，“请勿”，“禁止”“不予许”···此类的语言越来越少，取而代之的是温馨的，婉转的，使人更容易接受的话语。一个小小的温馨提示牌既告诉了人们该做什么，不该做什么，又温暖了人们的心田。，这样温馨的标语让人们的心里更舒服了。</p><p>作为一个提示牌，有时也会起到一个装点的左右，让原本纯绿色的草坪多了一点颜色，让人观赏的同时，也不会忘记留意下牌子上的字。</p><p>作为一个提示牌，有时也会起到一个装点的左右，让原本纯绿色的草坪多了一点颜色。</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                <!--模块四结束-->
+                <!--模块五 物流信息-->
+                <article>
+                    <div class="row article_container font_color article5">
+                        <div class="col-xs-12">
+                            <div class="row">
+                                <div class="col-xs-12 article_title"><p>#溯源信息#</p></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 article_content logistics revisePd">
+                                    <ul>
+                                        <li><img src="/originMobile/public/img/1/msg.png" alt="">
+                                            <div class="col-xs-3"><p>车牌：</p></div>
+                                            <div class="col-xs-7">皖A1234567</div>
+                                        </li>
+                                        <li><img src="/originMobile/public/img/1/msg.png" alt="">
+                                            <div class="col-xs-3"><p>发货时间：</p></div>
+                                            <div class="col-xs-7"><p></p></div>
+                                        </li>
+                                        <li><img src="/originMobile/public/img/1/msg.png" alt="">
+                                            <div class="col-xs-3"><p>销售地址：</p></div>
+                                            <div class="col-xs-7"><p>安徽省合肥市销售中心</p></div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row  bottomButton" style="width: 100%;text-align: center">
+                        <div class="col-xs-12">
+                            <div>
+                                <img class="wxButton" src="/originMobile/public/img/1/关注公众号.png" alt="">
+                            </div>
+                            <ul class="list-inline ulButtom">
+                                <li class="bgColor"><a href="#">四字按钮了吗</a></li>
+                                <li class="bgColor"><a href="#">四字按钮了</a></li>
+                                <li class="bgColor"><a href="#">四字按钮</a></li>
+                                <li class="bgColor"><a href="#">四字按</a></li>
+                                <li class="bgColor"><a href="#">四字</a></li>
+                                <li class="bgColor"><a href="#">四</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </article>
+                <!--模块五结束-->
+            </div>
+    </div>
+    </div>
+    <!--二维码-->
+    <div id="QR">
+        <img src="/originMobile/public/img/1/二维码.png" alt="">
+    </div>
+    <script src="/originMobile/public/js/jquery-3.2.1.min.js"></script>
+    <script src="/originMobile/public/js/bootstrap.min.js"></script>
+    <script src="/originMobile/public/js/publicJs.js"></script>
+</body>
+</html>
